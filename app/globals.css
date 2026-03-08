@@ -17,6 +17,9 @@
     --radius-xl: 1.5rem;
     --radius-full: 9999px;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
     background: var(--background);

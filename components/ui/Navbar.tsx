@@ -30,7 +30,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/guide"
+            href="#razon-guia"
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
                   isActive("/guide")
                     ? " text-primary"
@@ -42,7 +42,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/simulator"
+            href="/simuladorHuella"
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
                   isActive("/simulator")
                     ? " text-primary"

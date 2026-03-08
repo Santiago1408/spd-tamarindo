@@ -132,7 +132,7 @@ export default function EscanearImagen() {
             <span className="material-symbols-outlined text-sm">security</span>
             Escáner de Privacidad
           </div>
-          <h1 className="text-4xl font-black mb-3" style={{ color: "var(--color-primary)" }}>
+          <h1 className="text-4xl font-black mb-1" style={{ color: "var(--color-primary)" }}>
             Tu privacidad es{" "}
             <span style={{ color: "#2563eb" }}>lo primero</span>
           </h1>

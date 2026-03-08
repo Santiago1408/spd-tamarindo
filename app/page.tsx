@@ -6,18 +6,16 @@ export default function Home() {
   return (
     <div className="min-h-screen">
 
-      {/* Hero section — ancho limitado y centrado */}
       <main className="mx-auto max-w-7xl py-32 px-26 ">
         <section className=" px-6 py-16 lg:py-24">
 
           <div className="mx-auto max-w-7xl grid items-center gap-12 lg:grid-cols-2">
 
-            {/* COLUMNA TEXTO */}
             <div className="flex flex-col gap-6">
 
               <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="animates-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 Hub de Educación Digital
@@ -34,7 +32,7 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-4">
                 <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-bold text-white hover:shadow-xl hover:shadow-primary/30 transition-all">
-                  Comenzar Guía
+                  <a href="#razon-guia">Comenzar Guía</a>
                   <span className="material-symbols-outlined">arrow_forward</span>
                 </button>
 

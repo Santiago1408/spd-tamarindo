@@ -35,6 +35,7 @@ export default function RazonGuia() {
 
   return (
     <section
+      id="razon-guia"
       style={{ backgroundColor: "#eef0f2" }}
       className="py-16 lg:py-24"
     >
