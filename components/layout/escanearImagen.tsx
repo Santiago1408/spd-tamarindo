@@ -92,8 +92,6 @@ function ThreatCard({ threat }: { threat: Threat }) {
   );
 }
 
-// ── Main Component ────────────────────────────────────────────────────────────
-
 export default function EscanearImagen() {
   const { state, scanImage, reset } = escanearImagen();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -143,7 +141,7 @@ export default function EscanearImagen() {
             placas, uniformes escolares, direcciones y otros datos que podrían comprometer tu seguridad.
           </p>
         </div>
-        
+
         {state.status === "idle" && (
           <div
             className="rounded-2xl border-2 border-dashed p-12 text-center transition-all duration-200 cursor-pointer mb-6"
