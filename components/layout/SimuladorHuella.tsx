@@ -1,28 +1,13 @@
 "use client";
 
-import { 
-  Search , MapPin, Users, 
-  Mail, Phone, Briefcase, 
-  Calendar, Image, AlertTriangle
-} from "lucide-react";
-
+import { Search, AlertTriangle} from "lucide-react";
 import { useSimulador } from "@/features/useSimulador";
 
-// Nuestros datos falsos con variables en español
-const datosSimulados = [
-  { id: 1, icono: MapPin, titulo: "Ubicación", riesgo: "Alto", descripcion: "Ciudad visible en publicaciones recientes", color: "text-red-500", fondo: "bg-red-50" },
-  { id: 2, icono: Users, titulo: "Familiares", riesgo: "Alto", descripcion: "3 familiares identificados en tu perfil", color: "text-red-500", fondo: "bg-red-50" },
-  { id: 3, icono: Mail, titulo: "Correo Electrónico", riesgo: "Medio", descripcion: "Email visible en información de contacto", color: "text-yellow-600", fondo: "bg-yellow-50" },
-  { id: 4, icono: Phone, titulo: "Teléfono", riesgo: "Medio", descripcion: "Número parcialmente expuesto", color: "text-yellow-600", fondo: "bg-yellow-50" },
-  { id: 5, icono: Briefcase, titulo: "Trabajo/Escuela", riesgo: "Medio", descripcion: "Información laboral pública", color: "text-yellow-600", fondo: "bg-yellow-50" },
-  { id: 6, icono: Calendar, titulo: "Fecha de Nacimiento", riesgo: "Bajo", descripcion: "Fecha completa visible", color: "text-green-600", fondo: "bg-green-50" },
-  { id: 7, icono: Image, titulo: "Fotos Públicas", riesgo: "Medio", descripcion: "47 fotos accesibles públicamente", color: "text-yellow-600", fondo: "bg-yellow-50" },
-];
 
 export default function SimuladorHuella() {
   const { 
     nombreUsuario, setNombreUsuario, 
-    estaAnalizando, mostrarResultados, analizarHuella 
+    estaAnalizando, resultado, analizarHuella 
   } = useSimulador();
 
   return (
@@ -62,7 +47,7 @@ export default function SimuladorHuella() {
       </div>
 
       {/* Resultados */}
-      {mostrarResultados && (
+      {resultado && (
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           
           {/* Puntaje*/}
@@ -78,7 +63,7 @@ export default function SimuladorHuella() {
                 <span className="text-sm text-gray-400 font-medium">/100</span>
               </div>
             </div>
-            <span className="px-4 py-1.5 bg-yellow-50 text-yellow-700 font-medium rounded-full text-sm mb-8">Riesgo Moderado</span>
+            <span className="px-4 py-1.5 bg-yellow-50 text-yellow-700 font-medium rounded-full text-sm mb-8">Riesgo Medio</span>
             
             <div className="bg-slate-50 p-4 rounded-xl flex gap-3 text-sm text-gray-600 border border-slate-100 mt-auto">
               <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0" />
@@ -90,7 +75,7 @@ export default function SimuladorHuella() {
           <div className="col-span-1 md:col-span-7 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm">
             <h2 className="text-xl font-semibold mb-6">Datos Expuestos Encontrados</h2>
             <div className="space-y-4">
-              {datosSimulados.map((item) => (
+              {resultado.datos.map((item) => (
                 <div key={item.id} className="flex items-center justify-between p-4 rounded-xl border border-gray-50 hover:bg-gray-50 transition-colors group">
                   <div className="flex items-center gap-4">
                     <div className={`p-3 rounded-full ${item.fondo} ${item.color}`}>
