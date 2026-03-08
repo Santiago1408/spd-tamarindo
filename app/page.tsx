@@ -1,15 +1,9 @@
-import ConceptCard from "@/components/ui/ConceptCard";
+import SimuladorHuella from "@/components/layout/SimuladorHuella";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <ConceptCard
-          image="/concepts/grooming.png"
-          title="Grooming"
-          content="Building trust to exploit someone, especially minors, for harmful purposes."
-        />
-      </main>
-    </div>
+    <main className="min-h-screen bg-background-light py-10">
+      <SimuladorHuella />
+    </main>
   );
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import { 
-  Search, MapPin, Users, 
+  Search , MapPin, Users, 
   Mail, Phone, Briefcase, 
-  Calendar, Image, AlertTriangle 
+  Calendar, Image, AlertTriangle
 } from "lucide-react";
 
 import { useSimulador } from "@/features/useSimulador";
 
+// Nuestros datos falsos con variables en español
 const datosSimulados = [
   { id: 1, icono: MapPin, titulo: "Ubicación", riesgo: "Alto", descripcion: "Ciudad visible en publicaciones recientes", color: "text-red-500", fondo: "bg-red-50" },
   { id: 2, icono: Users, titulo: "Familiares", riesgo: "Alto", descripcion: "3 familiares identificados en tu perfil", color: "text-red-500", fondo: "bg-red-50" },
@@ -20,13 +21,14 @@ const datosSimulados = [
 
 export default function SimuladorHuella() {
   const { 
-    nombreUsr, setNombreUsr, 
+    nombreUsuario, setNombreUsuario, 
     estaAnalizando, mostrarResultados, analizarHuella 
   } = useSimulador();
 
   return (
     <div className="max-w-5xl mx-auto p-6 font-display text-primary">
       
+
       <div className="text-center mb-10 space-y-4">
         <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-secondary bg-indigo-50 border border-indigo-100 rounded-full">
           <Search className="w-4 h-4" /> Herramienta Interactiva
@@ -44,8 +46,8 @@ export default function SimuladorHuella() {
             <input 
               type="text" 
               placeholder="@tu_usuario"
-              value={nombreUsr}
-              onChange={(e) => setNombreUsr(e.target.value)} 
+              value={nombreUsuario}
+              onChange={(e) => setNombreUsuario(e.target.value)} 
               className="w-full pl-4 pr-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
             />
           </div>
@@ -63,7 +65,7 @@ export default function SimuladorHuella() {
       {mostrarResultados && (
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           
-          {/*Puntaje*/}
+          {/* Puntaje*/}
           <div className="col-span-1 md:col-span-5 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-8">Puntaje de Vulnerabilidad al Doxing</h2>
             <div className="relative w-48 h-48 mb-6">
@@ -84,7 +86,7 @@ export default function SimuladorHuella() {
             </div>
           </div>
 
-          {/* Columna Derecha: Datos Expuestos */}
+          {/*Datos */}
           <div className="col-span-1 md:col-span-7 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm">
             <h2 className="text-xl font-semibold mb-6">Datos Expuestos Encontrados</h2>
             <div className="space-y-4">

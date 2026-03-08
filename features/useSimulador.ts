@@ -1,26 +1,26 @@
 import { useState } from "react";
 
 export const useSimulador = () => {
-  const [nombreUsr, setNombreUsr] = useState("");
+  const [nombreUsuario, setNombreUsuario] = useState("");
   const [estaAnalizando, setEstaAnalizando] = useState(false);
   const [mostrarResultados, setMostrarResultados] = useState(false);
 
   const analizarHuella = () => {
-    if (!nombreUsr) return; 
+    if (!nombreUsuario) return; 
     
     setEstaAnalizando(true);
     setMostrarResultados(false);
     
-    // Simular una espera de busqueda
     setTimeout(() => {
       setEstaAnalizando(false);
       setMostrarResultados(true);
     }, 2000);
   };
 
+
   return {
-    nombreUsr,
-    setNombreUsr,
+    nombreUsuario,
+    setNombreUsuario,
     estaAnalizando,
     mostrarResultados,
     analizarHuella
