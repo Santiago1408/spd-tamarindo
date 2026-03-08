@@ -2,6 +2,7 @@
 import ConceptCard from "@/components/ui/ConceptCard";
 import RazonGuia from "@/components/layout/razonGuia";
 import ImportantConcepts from "@/components/layout/ImportantConcepts";
+import HistoryForm from "@/components/layout/HistoryForm";
 
 export default function Home() {
   return (
