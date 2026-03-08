@@ -1,3 +1,4 @@
+"use client";
 import ConceptCard from "@/components/ui/ConceptCard";
 import RazonGuia from "@/components/layout/razonGuia";
 import ImportantConcepts from "@/components/layout/ImportantConcepts";
@@ -31,13 +32,11 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-bold text-white hover:shadow-xl hover:shadow-primary/30 transition-all">
-                  <a href="#razon-guia">Comenzar Guía</a>
+                <button onClick={() => {
+                  document.getElementById("razon-guia")?.scrollIntoView({ behavior: "smooth" });
+                }} className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-bold text-white hover:shadow-xl hover:shadow-primary/30 transition-all">
+                  Comenzar Guía
                   <span className="material-symbols-outlined">arrow_forward</span>
-                </button>
-
-                <button className="inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 px-8 py-4 text-base font-bold text-primary hover:bg-primary/5 transition-all">
-                  Ver Recursos
                 </button>
               </div>
             </div>

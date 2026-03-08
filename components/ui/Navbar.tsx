@@ -37,7 +37,7 @@ export default function Navbar() {
                     : " text-gray-500"
                 }`}
           >
-            Guías
+            Biblioteca de Casos
             <BookOpen className="w-4 h-4" />
           </Link>
 
