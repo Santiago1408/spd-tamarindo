@@ -17,7 +17,7 @@ export default function Navbar() {
 
         <Link href="/" className="flex items-center gap-3 group">
           <Shield className="w-6 h-6 text-primary" />
-          <span className="font-semibold">Defensa Digital</span>
+          <span className="font-semibold text-primary">Defensa Digital</span>
         </Link>
 
         <nav className="flex items-center gap-4">

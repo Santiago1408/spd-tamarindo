@@ -4,10 +4,10 @@ import ImportantConcepts from "@/components/layout/ImportantConcepts";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black font-sans">
+    <div className="min-h-screen bg-white font-sans">
 
       {/* Hero section — ancho limitado y centrado */}
-      <main className="mx-auto max-w-7xl py-32 px-26 bg-white dark:bg-black  ">
+      <main className="mx-auto max-w-7xl py-32 px-26 bg-white">
         <section className=" px-6 py-16 lg:py-24">
 
           <div className="mx-auto max-w-7xl grid items-center gap-12 lg:grid-cols-2">
@@ -23,11 +23,11 @@ export default function Home() {
                 Hub de Educación Digital
               </div>
 
-              <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 md:text-6xl">
+              <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-900 :text-slatdarke-100 md:text-6xl">
                 Guía de Defensa contra la <span className="text-primary">Violencia Digital</span>
               </h1>
 
-              <p className="max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+              <p className="max-w-xl text-lg leading-relaxed text-slate-600">
                 Herramientas y conocimientos actualizados para proteger tu integridad y privacidad en el entorno digital.
                 Tu seguridad comienza con la prevención y el conocimiento de tus derechos.
               </p>
@@ -48,7 +48,7 @@ export default function Home() {
             <div className="relative h-[400px] w-full lg:h-[500px]">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary to-secondary opacity-10 blur-3xl"></div>
               <div
-                className="h-full w-full overflow-hidden rounded-3xl bg-slate-200 dark:bg-slate-800 shadow-2xl"
+                className="h-full w-full overflow-hidden rounded-3xl bg-slate-200 shadow-2xl"
                 style={{
                   backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyxVgpMYiEQo36z0VefUEhN21fFFAAy_J5uXmVuoiy4P6Lt3XO7m9jygNoFiWZQS_9K6HnlH9J-OOSY0q2W9Lw8JObEv4bJWNRySr8KVdkbcEo2pX6bs1mfTETQ2BrNVqT1OXpHhr9oKlPcT_uHxUusGDxyvN3OkHf6IGt7DX3AJAQcVkCikwQQwSqPiB6e7gursdEZFnLSYM4ZiBe8bGglWlvfhvtaoDtVHC1xHL6cfig4SkwMNH9azu3-irWYMEtiZkcYmu_jxZR')",
                   backgroundSize: "cover",
