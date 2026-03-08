@@ -174,7 +174,7 @@ export default function RazonGuia() {
         {/* Botón SIEMPRE visible */}
         <div className="flex justify-center mt-2">
           <Link
-            href="/huella-digital"
+            href="/simuladorHuella"
             className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white transition-all duration-200"
             style={{ backgroundColor: "var(--color-primary)" }}
             onMouseEnter={(e) => {
