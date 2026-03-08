@@ -30,7 +30,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="#razon-guia"
+            href="/bibliotecaCasos"
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
                   isActive("/guide")
                     ? " text-primary"
