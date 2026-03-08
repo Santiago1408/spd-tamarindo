@@ -6,8 +6,8 @@ export default function Home() {
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <ConceptCard
           image="/concepts/grooming.png"
-          title="Concept 1"
-          content="Content 1"
+          title="Grooming"
+          content="Building trust to exploit someone, especially minors, for harmful purposes."
         />
       </main>
     </div>
