@@ -62,10 +62,19 @@ export default function Home() {
           image="/concepts/grooming.png"
           title="Grooming"
           content="Building trust to exploit someone, especially minors, for harmful purposes."
+          detailContent="El grooming es una táctica de manipulación donde un adulto genera confianza con un menor de edad con el objetivo de explotarlo. Ocurre principalmente en redes sociales y plataformas de juegos en línea."
+          examples={[
+            "Un adulto se hace pasar por un joven en redes sociales",
+            "Envío de regalos o dinero para ganar confianza",
+            "Solicitud de fotos o información personal privada",
+          ]}
+          protectionTips={[
+            "No aceptes solicitudes de personas desconocidas",
+            "Nunca compartas fotos personales con extraños",
+            "Habla con un adulto de confianza si algo te incomoda",
+          ]}
         />
       </main>
-
-      {/* Secciones de ancho completo */}
       <RazonGuia />
 
     </div>
