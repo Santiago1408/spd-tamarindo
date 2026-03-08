@@ -9,6 +9,7 @@ export interface DatoExpuesto {
   descripcion: string;
   color: string;
   fondo: string;
+  consejo: string;
 }
 
 export interface PerfilUsuario {
@@ -26,27 +27,27 @@ const perfilesPrueba: Record<string, PerfilUsuario> = {
     puntaje: 15, nivel: "Riesgo Bajo", colorNivel: "text-green-700 bg-green-50", colorPuntaje: "text-green-500", colorGrafico: "#22c55e",
     mensaje: "¡Excelente! Tu configuración de privacidad es fuerte.",
     datos: [
-      { id: 1, icono: Calendar, titulo: "Año de Nacimiento", riesgo: "Bajo", descripcion: "Solo el año es visible", color: "text-green-600", fondo: "bg-green-50" },
-      { id: 2, icono: ShieldCheck, titulo: "Perfil Privado", riesgo: "Bajo", descripcion: "Fotos y posts protegidos", color: "text-green-600", fondo: "bg-green-50" }
+      { id: 1, icono: Calendar, titulo: "Año de Nacimiento", riesgo: "Bajo", descripcion: "Solo el año es visible", color: "text-green-600", fondo: "bg-green-50", consejo: " " },
+      { id: 2, icono: ShieldCheck, titulo: "Perfil Privado", riesgo: "Bajo", descripcion: "Fotos y posts protegidos", color: "text-green-600", fondo: "bg-green-50", consejo: " " }
     ]
   },
   "usr_medio": {
-    puntaje: 66, nivel: "Riesgo Moderado", colorNivel: "text-yellow-700 bg-yellow-50", colorPuntaje: "text-yellow-500", colorGrafico: "#eab308",
+    puntaje: 66, nivel: "Riesgo Medio", colorNivel: "text-yellow-700 bg-yellow-50", colorPuntaje: "text-yellow-500", colorGrafico: "#eab308",
     mensaje: "Tu perfil muestra información que podría ser utilizada para identificarte.",
     datos: [
-      { id: 1, icono: Mail, titulo: "Correo Electrónico", riesgo: "Medio", descripcion: "Email visible en contacto", color: "text-yellow-600", fondo: "bg-yellow-50" },
-      { id: 2, icono: Phone, titulo: "Teléfono", riesgo: "Medio", descripcion: "Últimos 4 dígitos expuestos", color: "text-yellow-600", fondo: "bg-yellow-50" },
-      { id: 3, icono: ImageIcon, titulo: "Fotos Públicas", riesgo: "Medio", descripcion: "47 fotos accesibles", color: "text-yellow-600", fondo: "bg-yellow-50" },
+      { id: 1, icono: Mail, titulo: "Correo Electrónico", riesgo: "Medio", descripcion: "Email visible en contacto", color: "text-yellow-600", fondo: "bg-yellow-50", consejo: "Usa un email secundario para redes sociales y mantén tu email principal privado." },
+      { id: 2, icono: Phone, titulo: "Teléfono", riesgo: "Medio", descripcion: "Últimos 4 dígitos expuestos", color: "text-yellow-600", fondo: "bg-yellow-50", consejo: "Elimina tu número de teléfono de la información pública de tu perfil." },
+      { id: 3, icono: ImageIcon, titulo: "Fotos Públicas", riesgo: "Medio", descripcion: "47 fotos accesibles", color: "text-yellow-600", fondo: "bg-yellow-50", consejo: "Revisa la configuración de privacidad de tus álbumes y fotos antiguas." },
     ]
   },
   "usr_alto": {
     puntaje: 92, nivel: "Riesgo Alto", colorNivel: "text-red-700 bg-red-50", colorPuntaje: "text-red-500", colorGrafico: "#ef4444",
     mensaje: "¡Peligro de Doxing! Estás exponiendo datos críticos.",
     datos: [
-      { id: 1, icono: MapPin, titulo: "Ubicación Exacta", riesgo: "Alto", descripcion: "Dirección de casa visible", color: "text-red-600", fondo: "bg-red-50" },
-      { id: 2, icono: Users, titulo: "Familiares Directos", riesgo: "Alto", descripcion: "Perfiles de padres expuestos", color: "text-red-600", fondo: "bg-red-50" },
-      { id: 3, icono: Phone, titulo: "Teléfono Celular", riesgo: "Alto", descripcion: "Número completo disponible", color: "text-red-600", fondo: "bg-red-50" },
-      { id: 4, icono: Briefcase, titulo: "Lugar de Estudio", riesgo: "Alto", descripcion: "Horarios de universidad públicos", color: "text-red-600", fondo: "bg-red-50" }
+      { id: 1, icono: MapPin, titulo: "Ubicación Exacta", riesgo: "Alto", descripcion: "Dirección de casa visible", color: "text-red-600", fondo: "bg-red-50", consejo: "Desactiva la geolocalización en tus publicaciones y evita mencionar ubicaciones específicas en tiempo real." },
+      { id: 2, icono: Users, titulo: "Familiares Directos", riesgo: "Alto", descripcion: "Perfiles de padres expuestos", color: "text-red-600", fondo: "bg-red-50", consejo: "Revisa las etiquetas en fotos familiares y configura quién puede verte en publicaciones de otros." },
+      { id: 3, icono: Phone, titulo: "Teléfono Celular", riesgo: "Alto", descripcion: "Número completo disponible", color: "text-red-600", fondo: "bg-red-50", consejo: "Elimina tu número de teléfono de la información pública de tu perfil." },
+      { id: 4, icono: Briefcase, titulo: "Lugar de Estudio", riesgo: "Alto", descripcion: "Horarios de universidad públicos", color: "text-red-600", fondo: "bg-red-50", consejo: "Limita la visibilidad de tu información laboral solo a conexiones de confianza." }
     ]
   }
 };

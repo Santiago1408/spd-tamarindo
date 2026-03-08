@@ -1,7 +1,8 @@
 "use client";
 
-import { Search, AlertTriangle} from "lucide-react";
-import { useSimulador } from "@/features/useSimulador";
+import { useState } from "react";
+import { Search, AlertTriangle, Shield} from "lucide-react";
+import { useSimulador, DatoExpuesto } from "@/features/useSimulador";
 
 
 export default function SimuladorHuella() {
@@ -10,10 +11,10 @@ export default function SimuladorHuella() {
     estaAnalizando, resultado, analizarHuella 
   } = useSimulador();
 
+  const [datoSeleccionado, setDatoSeleccionado] = useState<DatoExpuesto | null>(null);
+
   return (
     <div className="max-w-5xl mx-auto p-6 font-display text-primary">
-      
-
       <div className="text-center mb-10 space-y-4">
         <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-secondary bg-indigo-50 border border-indigo-100 rounded-full">
           <Search className="w-4 h-4" /> Herramienta Interactiva
@@ -87,7 +88,11 @@ export default function SimuladorHuella() {
             <h2 className="text-xl font-semibold mb-6">Datos Expuestos Encontrados</h2>
             <div className="space-y-4">
               {resultado.datos.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-4 rounded-xl border border-gray-50 hover:bg-gray-50 transition-colors group">
+                <div 
+                  key={item.id} 
+                  onClick={() => item.riesgo !== "Bajo" && setDatoSeleccionado(item)}
+                  className={`flex items-center justify-between p-4 rounded-xl border border-gray-50 transition-colors group ${item.riesgo !== "Bajo" ? "hover:bg-gray-50 cursor-pointer" : ""}`}
+                >
                   <div className="flex items-center gap-4">
                     <div className={`p-3 rounded-full ${item.fondo} ${item.color}`}>
                       <item.icono className="w-5 h-5" />
@@ -100,13 +105,49 @@ export default function SimuladorHuella() {
                       <p className="text-sm text-gray-500">{item.descripcion}</p>
                     </div>
                   </div>
+                  {item.riesgo !== "Bajo" && (
+                    <button className="text-sm font-medium text-secondary hover:text-indigo-700 transition-colors flex items-center gap-1">
+                      Proteger <span className="text-lg leading-none">›</span>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
           </div>
 
+          {datoSeleccionado && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className={`w-14 h-14 rounded-2xl ${datoSeleccionado.fondo} ${datoSeleccionado.color} flex items-center justify-center mb-6`}>
+              <datoSeleccionado.icono className="w-7 h-7" />
+            </div>
+            <h3 className="text-2xl font-bold mb-2 text-gray-900">
+              Cómo proteger: {datoSeleccionado.titulo}
+            </h3>
+            <p className="text-gray-500 mb-6">
+              {datoSeleccionado.descripcion}
+            </p>
+
+            {/*Consejo */}
+            <div className="bg-green-50 border border-green-200 rounded-2xl p-4 flex gap-3 mb-8">
+              <Shield className="w-6 h-6 text-green-600 shrink-0" />
+              <p className="text-sm text-gray-700">
+                {datoSeleccionado.consejo}
+              </p>
+            </div>
+
+            <button 
+              onClick={() => setDatoSeleccionado(null)}
+              className="w-full py-3.5 bg-secondary text-white font-semibold rounded-xl hover:bg-indigo-600 transition-colors"
+            >
+              Entendido
+            </button>
+            
+          </div>
         </div>
       )}
     </div>
+    )}
+</div>
   );
 }
