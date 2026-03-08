@@ -164,6 +164,22 @@ export default function RazonGuia() {
             </div>
           </div>
         </div>
+        <div
+        className="mt-6 overflow-hidden rounded-2xl shadow-sm border"
+        style={{
+            borderColor: "color-mix(in srgb, var(--color-primary) 15%, transparent)",
+            aspectRatio: "16/9",
+        }}
+        >
+        <video
+            src="/videos/girl.mp4"
+            controls
+            className="w-full h-full"
+            style={{ display: "block", objectFit: "cover" }}
+        >
+            Tu navegador no soporta la reproducción de video.
+        </video>
+        </div>
         <div className="flex justify-center mt-2">
           <Link
             href="/simuladorHuella"
