@@ -39,8 +39,6 @@ export default function RazonGuia() {
       className="py-16 lg:py-24"
     >
       <div className="mx-auto max-w-7xl px-6">
-
-        {/* Header card — siempre visible, clickeable */}
         <button
           onClick={() => setOpen(!open)}
           className="w-full mb-4 flex items-center justify-between rounded-2xl px-6 py-5 shadow-sm border transition-all duration-200 text-left"
@@ -77,7 +75,6 @@ export default function RazonGuia() {
             </div>
           </div>
 
-          {/* Chevron animado */}
           <span
             className="material-symbols-outlined text-2xl select-none transition-transform duration-300"
             style={{
@@ -89,7 +86,6 @@ export default function RazonGuia() {
           </span>
         </button>
 
-        {/* Contenido colapsable */}
         <div
           className="overflow-hidden transition-all duration-500 ease-in-out"
           style={{ maxHeight: open ? "600px" : "0px", opacity: open ? 1 : 0 }}
@@ -101,7 +97,6 @@ export default function RazonGuia() {
               borderColor: "color-mix(in srgb, var(--color-primary) 15%, transparent)",
             }}
           >
-            {/* Grid 2x2 */}
             <div className="grid gap-6 sm:grid-cols-2">
               {reasons.map((item) => (
                 <div
@@ -145,8 +140,6 @@ export default function RazonGuia() {
                 </div>
               ))}
             </div>
-
-            {/* Alert banner */}
             <div
               className="mt-6 flex gap-3 rounded-xl px-5 py-4"
               style={{
@@ -170,8 +163,6 @@ export default function RazonGuia() {
             </div>
           </div>
         </div>
-
-        {/* Botón SIEMPRE visible */}
         <div className="flex justify-center mt-2">
           <Link
             href="/simuladorHuella"
@@ -192,6 +183,27 @@ export default function RazonGuia() {
           >
             <span className="material-symbols-outlined text-lg">fingerprint</span>
             Descubrir mi huella digital
+            <span className="material-symbols-outlined text-base">arrow_forward</span>
+          </Link>
+          <Link
+            href="/escanearImg"
+            className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white transition-all duration-200"
+            style={{ backgroundColor: "var(--color-primary)" }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.backgroundColor = "color-mix(in srgb, var(--color-primary) 85%, black)";
+              el.style.transform = "translateY(-2px)";
+              el.style.boxShadow = "0 8px 20px color-mix(in srgb, var(--color-primary) 30%, transparent)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.backgroundColor = "var(--color-primary)";
+              el.style.transform = "translateY(0)";
+              el.style.boxShadow = "none";
+            }}
+          >
+            <span className="material-symbols-outlined text-lg">fingerprint</span>
+            Buscar vulnerabilidades en imágenes
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </Link>
         </div>

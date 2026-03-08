@@ -1,34 +1,20 @@
 "use client";
 
-import { 
-  Search , MapPin, Users, 
-  Mail, Phone, Briefcase, 
-  Calendar, Image, AlertTriangle
-} from "lucide-react";
+import { useState } from "react";
+import { Search, AlertTriangle, Shield} from "lucide-react";
+import { useSimulador, DatoExpuesto } from "@/features/useSimulador";
 
-import { useSimulador } from "@/features/useSimulador";
-
-// Nuestros datos falsos con variables en español
-const datosSimulados = [
-  { id: 1, icono: MapPin, titulo: "Ubicación", riesgo: "Alto", descripcion: "Ciudad visible en publicaciones recientes", color: "text-red-500", fondo: "bg-red-50" },
-  { id: 2, icono: Users, titulo: "Familiares", riesgo: "Alto", descripcion: "3 familiares identificados en tu perfil", color: "text-red-500", fondo: "bg-red-50" },
-  { id: 3, icono: Mail, titulo: "Correo Electrónico", riesgo: "Medio", descripcion: "Email visible en información de contacto", color: "text-yellow-600", fondo: "bg-yellow-50" },
-  { id: 4, icono: Phone, titulo: "Teléfono", riesgo: "Medio", descripcion: "Número parcialmente expuesto", color: "text-yellow-600", fondo: "bg-yellow-50" },
-  { id: 5, icono: Briefcase, titulo: "Trabajo/Escuela", riesgo: "Medio", descripcion: "Información laboral pública", color: "text-yellow-600", fondo: "bg-yellow-50" },
-  { id: 6, icono: Calendar, titulo: "Fecha de Nacimiento", riesgo: "Bajo", descripcion: "Fecha completa visible", color: "text-green-600", fondo: "bg-green-50" },
-  { id: 7, icono: Image, titulo: "Fotos Públicas", riesgo: "Medio", descripcion: "47 fotos accesibles públicamente", color: "text-yellow-600", fondo: "bg-yellow-50" },
-];
 
 export default function SimuladorHuella() {
   const { 
     nombreUsuario, setNombreUsuario, 
-    estaAnalizando, mostrarResultados, analizarHuella 
+    estaAnalizando, resultado, analizarHuella 
   } = useSimulador();
+
+  const [datoSeleccionado, setDatoSeleccionado] = useState<DatoExpuesto | null>(null);
 
   return (
     <div className="max-w-5xl mx-auto p-6 font-display text-primary">
-      
-
       <div className="text-center mb-10 space-y-4">
         <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-secondary bg-indigo-50 border border-indigo-100 rounded-full">
           <Search className="w-4 h-4" /> Herramienta Interactiva
@@ -62,27 +48,38 @@ export default function SimuladorHuella() {
       </div>
 
       {/* Resultados */}
-      {mostrarResultados && (
+      {resultado && (
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           
           {/* Puntaje*/}
-          <div className="col-span-1 md:col-span-5 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm flex flex-col items-center">
+          <div className="col-span-1 md:col-span-5 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm flex flex-col items-center text-center">
             <h2 className="text-xl font-semibold mb-8">Puntaje de Vulnerabilidad al Doxing</h2>
             <div className="relative w-48 h-48 mb-6">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f3f4f6" strokeWidth="8" />
-                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#eab308" strokeWidth="8" strokeDasharray="251.2" strokeDashoffset="85.4" strokeLinecap="round" />
+                <circle 
+                  cx="50" cy="50" r="40" fill="transparent" 
+                  stroke={resultado.colorGrafico} 
+                  strokeWidth="8" 
+                  strokeDasharray="251.2" 
+                  strokeDashoffset={251.2 - (251.2 * resultado.puntaje) / 100} 
+                  strokeLinecap="round" 
+                  className="transition-all duration-1000 ease-out"
+                />
               </svg>
               <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
-                <span className="text-5xl font-bold text-yellow-500">66</span>
+                <span className={`text-5xl font-bold ${resultado.colorPuntaje}`}>
+                  {resultado.puntaje}
+                </span>
                 <span className="text-sm text-gray-400 font-medium">/100</span>
               </div>
             </div>
-            <span className="px-4 py-1.5 bg-yellow-50 text-yellow-700 font-medium rounded-full text-sm mb-8">Riesgo Moderado</span>
-            
-            <div className="bg-slate-50 p-4 rounded-xl flex gap-3 text-sm text-gray-600 border border-slate-100 mt-auto">
-              <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0" />
-              <p>Tu perfil muestra información que podría ser utilizada para identificarte o localizarte. Revisa las recomendaciones para mejorar tu privacidad.</p>
+            <span className={`px-4 py-1.5 font-medium rounded-full text-sm mb-8 ${resultado.colorNivel}`}>
+              {resultado.nivel}
+            </span>
+            <div className="bg-slate-50 p-4 rounded-xl flex gap-3 text-sm text-gray-600 border border-slate-100 mt-auto text-left">
+              <AlertTriangle className={`w-5 h-5 shrink-0 ${resultado.colorPuntaje}`} />
+              <p>{resultado.mensaje}</p>
             </div>
           </div>
 
@@ -90,8 +87,12 @@ export default function SimuladorHuella() {
           <div className="col-span-1 md:col-span-7 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm">
             <h2 className="text-xl font-semibold mb-6">Datos Expuestos Encontrados</h2>
             <div className="space-y-4">
-              {datosSimulados.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-4 rounded-xl border border-gray-50 hover:bg-gray-50 transition-colors group">
+              {resultado.datos.map((item) => (
+                <div 
+                  key={item.id} 
+                  onClick={() => item.riesgo !== "Bajo" && setDatoSeleccionado(item)}
+                  className={`flex items-center justify-between p-4 rounded-xl border border-gray-50 transition-colors group ${item.riesgo !== "Bajo" ? "hover:bg-gray-50 cursor-pointer" : ""}`}
+                >
                   <div className="flex items-center gap-4">
                     <div className={`p-3 rounded-full ${item.fondo} ${item.color}`}>
                       <item.icono className="w-5 h-5" />
@@ -104,13 +105,49 @@ export default function SimuladorHuella() {
                       <p className="text-sm text-gray-500">{item.descripcion}</p>
                     </div>
                   </div>
+                  {item.riesgo !== "Bajo" && (
+                    <button className="text-sm font-medium text-secondary hover:text-indigo-700 transition-colors flex items-center gap-1">
+                      Proteger <span className="text-lg leading-none">›</span>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
           </div>
 
+          {datoSeleccionado && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className={`w-14 h-14 rounded-2xl ${datoSeleccionado.fondo} ${datoSeleccionado.color} flex items-center justify-center mb-6`}>
+              <datoSeleccionado.icono className="w-7 h-7" />
+            </div>
+            <h3 className="text-2xl font-bold mb-2 text-gray-900">
+              Cómo proteger: {datoSeleccionado.titulo}
+            </h3>
+            <p className="text-gray-500 mb-6">
+              {datoSeleccionado.descripcion}
+            </p>
+
+            {/*Consejo */}
+            <div className="bg-green-50 border border-green-200 rounded-2xl p-4 flex gap-3 mb-8">
+              <Shield className="w-6 h-6 text-green-600 shrink-0" />
+              <p className="text-sm text-gray-700">
+                {datoSeleccionado.consejo}
+              </p>
+            </div>
+
+            <button 
+              onClick={() => setDatoSeleccionado(null)}
+              className="w-full py-3.5 bg-secondary text-white font-semibold rounded-xl hover:bg-indigo-600 transition-colors"
+            >
+              Entendido
+            </button>
+            
+          </div>
         </div>
       )}
     </div>
+    )}
+</div>
   );
 }

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -10,7 +9,7 @@ export interface Threat {
   title: string;
   description: string;
   level: ThreatLevel;
-  icon: string; // material symbol name
+  icon: string;
   recommendation: string;
 }
 
@@ -39,39 +38,115 @@ const SCAN_STEPS = [
   { progress: 95, label: "Generando recomendaciones..." },
 ];
 
-const SYSTEM_PROMPT = `Eres un sistema experto en privacidad y seguridad digital. Tu tarea es analizar imágenes para detectar información potencialmente peligrosa que podría comprometer la seguridad o privacidad de una persona.
+const MOCK_THREATS_POOL: Threat[] = [
+  {
+    id: "placa",
+    title: "Placa de vehículo visible",
+    description:
+      "Se detectó una placa vehicular en la imagen. Esto puede usarse para rastrear tu vehículo, conocer tu domicilio o identificarte.",
+    level: "high",
+    icon: "directions_car",
+    recommendation:
+      "Aplica desenfoque sobre la placa antes de publicar. Puedes usar apps como Snapseed o el editor de Google Fotos.",
+  },
+  {
+    id: "uniforme",
+    title: "Uniforme institucional",
+    description:
+      "Se detectó un uniforme escolar o institucional con logo visible. Esto revela la institución a la que asistes y tu rutina diaria.",
+    level: "high",
+    icon: "school",
+    recommendation:
+      "Evita publicar fotos con uniformes que identifiquen tu colegio o trabajo. Si es necesario, cubre el logo con un sticker o recorta la imagen.",
+  },
+  {
+    id: "direccion",
+    title: "Dirección en cartel",
+    description:
+      "Se detectó texto en un letrero o cartel que podría revelar una dirección o ubicación específica cercana a tu domicilio.",
+    level: "high",
+    icon: "location_on",
+    recommendation:
+      "Elimina o desenfoca cualquier texto visible en carteles antes de compartir la imagen públicamente.",
+  },
+  {
+    id: "rostro",
+    title: "Rostro de menor de edad",
+    description:
+      "Se detectó el rostro de lo que podría ser un menor de edad. Publicar imágenes de menores sin consentimiento puede vulnerar su privacidad.",
+    level: "medium",
+    icon: "face",
+    recommendation:
+      "Considera difuminar los rostros de menores antes de publicar, especialmente en redes públicas.",
+  },
+  {
+    id: "documento",
+    title: "Documento visible",
+    description:
+      "Se detectó lo que parece ser un documento, carnet o papel con información personal que podría ser legible.",
+    level: "high",
+    icon: "badge",
+    recommendation:
+      "Nunca publiques fotos donde aparezcan documentos de identidad, aunque sea parcialmente visibles.",
+  },
+  {
+    id: "gps",
+    title: "Metadatos GPS en la imagen",
+    description:
+      "Los metadatos EXIF de esta imagen contienen coordenadas GPS que revelan exactamente dónde fue tomada la foto.",
+    level: "medium",
+    icon: "my_location",
+    recommendation:
+      "Desactiva la ubicación en tu cámara o elimina los metadatos antes de compartir. En iOS ve a Ajustes > Privacidad > Localización > Cámara.",
+  },
+  {
+    id: "telefono",
+    title: "Número de teléfono visible",
+    description:
+      "Se detectó lo que parece ser un número de teléfono visible en la imagen, lo que podría usarse para contacto no deseado.",
+    level: "medium",
+    icon: "phone",
+    recommendation:
+      "Cubre o elimina cualquier número de teléfono visible antes de publicar la imagen.",
+  },
+];
 
-Analiza la imagen proporcionada y detecta amenazas como:
-- Placas de autos o vehículos
-- Uniformes escolares o institucionales con logos visibles
-- Direcciones en carteles, letreros o documentos
-- Números de teléfono o correos visibles
-- Documentos de identidad o tarjetas
-- Ubicaciones geográficas identificables
-- Información financiera
-- Rostros de menores de edad
-- Cualquier otro dato que pueda revelar identidad, ubicación o rutina
-
-Responde ÚNICAMENTE con un JSON válido con esta estructura exacta, sin texto adicional ni backticks:
-{
-  "overallRisk": "high" | "medium" | "low" | "safe",
-  "summary": "Resumen breve de 1-2 oraciones sobre el análisis",
-  "threats": [
-    {
-      "id": "unique_id",
-      "title": "Nombre corto de la amenaza",
-      "description": "Descripción específica de qué se detectó y por qué es peligroso",
-      "level": "high" | "medium" | "low",
-      "icon": "nombre_icono_material_symbols",
-      "recommendation": "Acción concreta que el usuario debe tomar"
-    }
-  ]
-}
-
-Para el campo "icon" usa nombres válidos de Material Symbols como: location_on, directions_car, school, badge, phone, credit_card, face, home, visibility, warning, person.
-
-Si la imagen es segura y no tiene amenazas, devuelve threats: [] y overallRisk: "safe".
-Si no puedes analizar la imagen claramente, indícalo en el summary con overallRisk: "low".`;
+const MOCK_SCENARIOS: {
+  overallRisk: ThreatLevel | "safe";
+  threatIds: string[];
+  summary: string;
+}[] = [
+  {
+    overallRisk: "high" as const,
+    threatIds: ["placa", "direccion", "uniforme"],
+    summary:
+      "Se detectaron 3 amenazas críticas. Esta imagen revela tu ubicación, institución y vehículo. No es seguro publicarla.",
+  },
+  {
+    overallRisk: "medium" as const,
+    threatIds: ["rostro", "gps"],
+    summary:
+      "Se detectaron 2 amenazas moderadas. Los metadatos y el rostro visible podrían comprometer la privacidad.",
+  },
+  {
+    overallRisk: "high" as const,
+    threatIds: ["documento", "telefono"],
+    summary:
+      "Se detectaron datos personales sensibles. Un documento y un número de teléfono son visibles en la imagen.",
+  },
+  {
+    overallRisk: "low" as const,
+    threatIds: ["gps"],
+    summary:
+      "La imagen parece segura visualmente, pero contiene metadatos de ubicación que conviene eliminar.",
+  },
+  {
+    overallRisk: "safe" as const,
+    threatIds: [],
+    summary:
+      "No se detectaron amenazas visibles. La imagen parece segura para publicar.",
+  },
+];
 
 export function escanearImagen() {
   const [state, setState] = useState<ScanState>({
@@ -83,19 +158,30 @@ export function escanearImagen() {
     previewUrl: null,
   });
 
-  const simulateProgress = async (): Promise<void> => {
+  const simulateScan = async (): Promise<ScanResult> => {
     for (const step of SCAN_STEPS) {
-      await new Promise((res) => setTimeout(res, 400 + Math.random() * 300));
+      await new Promise((res) => setTimeout(res, 400 + Math.random() * 350));
       setState((prev) => ({
         ...prev,
         progress: step.progress,
         progressLabel: step.label,
       }));
     }
+
+    const scenario = MOCK_SCENARIOS[Math.floor(Math.random() * MOCK_SCENARIOS.length)];
+    const threats = MOCK_THREATS_POOL.filter((t) =>
+      scenario.threatIds.includes(t.id)
+    );
+
+    return {
+      threats,
+      summary: scenario.summary,
+      overallRisk: scenario.overallRisk,
+      scannedAt: new Date(),
+    };
   };
 
   const scanImage = async (file: File) => {
-    // Generate preview URL
     const previewUrl = URL.createObjectURL(file);
 
     setState({
@@ -108,95 +194,20 @@ export function escanearImagen() {
     });
 
     try {
-      // Convert file to base64
-      const base64 = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const result = reader.result as string;
-          resolve(result.split(",")[1]);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-
-      // Determine media type
-      const mediaType = file.type as
-        | "image/jpeg"
-        | "image/png"
-        | "image/gif"
-        | "image/webp";
-
-      // Start fake progress simulation in parallel
-      const progressPromise = simulateProgress();
-
-      // Call Claude Vision API
-      const apiPromise = fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
-          messages: [
-            {
-              role: "user",
-              content: [
-                {
-                  type: "image",
-                  source: {
-                    type: "base64",
-                    media_type: mediaType,
-                    data: base64,
-                  },
-                },
-                {
-                  type: "text",
-                  text: "Analiza esta imagen y detecta cualquier información que pueda comprometer la privacidad o seguridad de la persona.",
-                },
-              ],
-            },
-          ],
-        }),
-      });
-
-      // Wait for both to finish
-      const [apiResponse] = await Promise.all([apiPromise, progressPromise]);
-
-      if (!apiResponse.ok) {
-        throw new Error(`Error de API: ${apiResponse.status}`);
-      }
-
-      const data = await apiResponse.json();
-      const rawText = data.content
-        .map((item: { type: string; text?: string }) =>
-          item.type === "text" ? item.text : ""
-        )
-        .join("");
-
-      // Parse JSON response
-      const cleaned = rawText.replace(/```json|```/g, "").trim();
-      const parsed = JSON.parse(cleaned) as Omit<ScanResult, "scannedAt">;
+      const result = await simulateScan();
 
       setState((prev) => ({
         ...prev,
         status: "done",
         progress: 100,
         progressLabel: "Análisis completado",
-        result: {
-          ...parsed,
-          scannedAt: new Date(),
-        },
+        result,
       }));
     } catch (err) {
       setState((prev) => ({
         ...prev,
         status: "error",
-        error:
-          err instanceof Error
-            ? err.message
-            : "Error desconocido al analizar la imagen",
+        error: err instanceof Error ? err.message : "Error desconocido",
       }));
     }
   };
