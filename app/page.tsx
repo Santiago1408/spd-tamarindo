@@ -1,10 +1,12 @@
 import ConceptCard from "@/components/ui/ConceptCard";
 import RazonGuia from "@/components/layout/razonGuia";
+import ImportantConcepts from "@/components/layout/ImportantConcepts";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-800 dark:bg-black font-sans">
 
+      {/* Hero section */}
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start mx-auto">
         <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary">
           <span className="relative flex h-2 w-2">
@@ -23,7 +25,7 @@ export default function Home() {
           image="/concepts/grooming.png"
           title="Grooming"
           content="Building trust to exploit someone, especially minors, for harmful purposes."
-          detailContent="El grooming es una táctica de manipulación donde un adulto genera confianza con un menor de edad con el objetivo de explotarlo. Ocurre principalmente en redes sociales y plataformas de juegos en línea."
+          detailContent="El grooming es una táctica de manipulación donde un adulto genera confianza con un menor de edad con el objetivo de explotarlo."
           examples={[
             "Un adulto se hace pasar por un joven en redes sociales",
             "Envío de regalos o dinero para ganar confianza",
@@ -37,7 +39,7 @@ export default function Home() {
         />
       </main>
       <RazonGuia />
-
+      <ImportantConcepts />
     </div>
   );
 }
