@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen">
 
       {/* Hero section — ancho limitado y centrado */}
-      <main className="mx-auto max-w-7xl py-32 px-26 bg-white">
+      <main className="mx-auto max-w-7xl py-32 px-26 ">
         <section className=" px-6 py-16 lg:py-24">
 
           <div className="mx-auto max-w-7xl grid items-center gap-12 lg:grid-cols-2">
