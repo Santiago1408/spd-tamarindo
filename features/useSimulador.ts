@@ -69,7 +69,7 @@ export const useSimulador = () => {
       if (perfilesPrueba[usuarioLimpio]) {
         setResultado(perfilesPrueba[usuarioLimpio]);
       } else {
-        setResultado(perfilesPrueba["usr_moderado"]);
+        setResultado(perfilesPrueba["usr_medio"]);
       }
     }, 2000);
   };

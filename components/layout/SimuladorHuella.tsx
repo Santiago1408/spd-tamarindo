@@ -51,23 +51,34 @@ export default function SimuladorHuella() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           
           {/* Puntaje*/}
-          <div className="col-span-1 md:col-span-5 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm flex flex-col items-center">
+          <div className="col-span-1 md:col-span-5 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-sm flex flex-col items-center text-center">
             <h2 className="text-xl font-semibold mb-8">Puntaje de Vulnerabilidad al Doxing</h2>
             <div className="relative w-48 h-48 mb-6">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f3f4f6" strokeWidth="8" />
-                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#eab308" strokeWidth="8" strokeDasharray="251.2" strokeDashoffset="85.4" strokeLinecap="round" />
+                <circle 
+                  cx="50" cy="50" r="40" fill="transparent" 
+                  stroke={resultado.colorGrafico} 
+                  strokeWidth="8" 
+                  strokeDasharray="251.2" 
+                  strokeDashoffset={251.2 - (251.2 * resultado.puntaje) / 100} 
+                  strokeLinecap="round" 
+                  className="transition-all duration-1000 ease-out"
+                />
               </svg>
               <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
-                <span className="text-5xl font-bold text-yellow-500">66</span>
+                <span className={`text-5xl font-bold ${resultado.colorPuntaje}`}>
+                  {resultado.puntaje}
+                </span>
                 <span className="text-sm text-gray-400 font-medium">/100</span>
               </div>
             </div>
-            <span className="px-4 py-1.5 bg-yellow-50 text-yellow-700 font-medium rounded-full text-sm mb-8">Riesgo Medio</span>
-            
-            <div className="bg-slate-50 p-4 rounded-xl flex gap-3 text-sm text-gray-600 border border-slate-100 mt-auto">
-              <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0" />
-              <p>Tu perfil muestra información que podría ser utilizada para identificarte o localizarte. Revisa las recomendaciones para mejorar tu privacidad.</p>
+            <span className={`px-4 py-1.5 font-medium rounded-full text-sm mb-8 ${resultado.colorNivel}`}>
+              {resultado.nivel}
+            </span>
+            <div className="bg-slate-50 p-4 rounded-xl flex gap-3 text-sm text-gray-600 border border-slate-100 mt-auto text-left">
+              <AlertTriangle className={`w-5 h-5 shrink-0 ${resultado.colorPuntaje}`} />
+              <p>{resultado.mensaje}</p>
             </div>
           </div>
 
