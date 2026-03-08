@@ -3,7 +3,7 @@ import React from 'react'
 
 function ImportantConcepts() {
     return (
-        <div className='w-4/5 p-10 flex flex-col items-center'>
+        <div className='p-10 flex flex-col items-center'>
             <h1 className='text-5xl font-bold text-center mb-5'>Conceptos importantes a conocer</h1>
             <p className='text-center mb-10'>
                 Haz clic en cualquiera de los conceptos para aprender más sobre ellos.

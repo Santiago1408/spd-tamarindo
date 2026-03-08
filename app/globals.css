@@ -9,7 +9,6 @@
     --color-primary: #103465;
     --color-secondary: #6366f1;
     --color-background-light: #f6f7f8;
-    --color-background-dark: #121820;
 
     --font-display: "Inter", sans-serif;
 
@@ -17,13 +16,6 @@
     --radius-lg: 1rem;
     --radius-xl: 1.5rem;
     --radius-full: 9999px;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #121820;
-        --foreground: #f6f7f8;
-    }
 }
 
 body {

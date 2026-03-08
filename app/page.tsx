@@ -4,10 +4,10 @@ import ImportantConcepts from "@/components/layout/ImportantConcepts";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black font-sans">
+    <div className="min-h-screen">
 
       {/* Hero section — ancho limitado y centrado */}
-      <main className="mx-auto max-w-7xl py-32 px-26 bg-white dark:bg-black  ">
+      <main className="mx-auto max-w-7xl py-32 px-26 bg-white">
         <section className=" px-6 py-16 lg:py-24">
 
           <div className="mx-auto max-w-7xl grid items-center gap-12 lg:grid-cols-2">
@@ -58,7 +58,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
+
       </main>
       <RazonGuia />
       <ImportantConcepts />
