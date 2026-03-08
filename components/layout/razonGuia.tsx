@@ -186,7 +186,9 @@ export default function RazonGuia() {
             Descubrir mi huella digital
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </Link>
-          <Link
+        </div>
+        <div className="flex justify-center mt-2">
+            <Link
             href="/escanearImg"
             className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white transition-all duration-200"
             style={{ backgroundColor: "var(--color-primary)" }}
@@ -208,7 +210,6 @@ export default function RazonGuia() {
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </Link>
         </div>
-
       </div>
     </section>
   );
