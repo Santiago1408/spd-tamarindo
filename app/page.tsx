@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-black font-sans">
 
       {/* Hero section — ancho limitado y centrado */}
-      <main className="flex min-h-screen w-full max-auto flex-col items-center justify-between py-32 px-26 bg-white dark:bg-black  mx-auto">
+      <main className="mx-auto max-w-7xl py-32 px-26 bg-white dark:bg-black  ">
         <section className=" px-6 py-16 lg:py-24">
 
           <div className="mx-auto max-w-7xl grid items-center gap-12 lg:grid-cols-2">
@@ -59,22 +59,6 @@ export default function Home() {
           </div>
         </section>
         
-        <ConceptCard
-          image="/concepts/grooming.png"
-          title="Grooming"
-          content="Building trust to exploit someone, especially minors, for harmful purposes."
-          detailContent="El grooming es una táctica de manipulación donde un adulto genera confianza con un menor de edad con el objetivo de explotarlo."
-          examples={[
-            "Un adulto se hace pasar por un joven en redes sociales",
-            "Envío de regalos o dinero para ganar confianza",
-            "Solicitud de fotos o información personal privada",
-          ]}
-          protectionTips={[
-            "No aceptes solicitudes de personas desconocidas",
-            "Nunca compartas fotos personales con extraños",
-            "Habla con un adulto de confianza si algo te incomoda",
-          ]}
-        />
       </main>
       <RazonGuia />
       <ImportantConcepts />
