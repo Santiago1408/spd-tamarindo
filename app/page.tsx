@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-800 dark:bg-black font-sans">
 
-      {/* Hero section — ancho limitado y centrado */}
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start mx-auto">
         <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary">
           <span className="relative flex h-2 w-2">
@@ -26,8 +25,6 @@ export default function Home() {
           content="Building trust to exploit someone, especially minors, for harmful purposes."
         />
       </main>
-
-      {/* Secciones de ancho completo */}
       <RazonGuia />
 
     </div>
