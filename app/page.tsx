@@ -20,8 +20,8 @@ export default function Home() {
 
         <ConceptCard
           image="/concepts/grooming.png"
-          title="Concept 1"
-          content="Content 1"
+          title="Grooming"
+          content="Building trust to exploit someone, especially minors, for harmful purposes."
         />
       </main>
     </div>
