@@ -3,7 +3,7 @@
 import { useState, ElementType } from "react";
 import { 
   BookOpen, ChevronDown, ChevronUp, AlertOctagon, 
-  ShieldAlert, UserX, HeartCrack, ImageOff, MapPin 
+  ShieldAlert, UserX, HeartCrack, ImageOff, MapPin, Headphones, Play
 } from "lucide-react";
 
 export interface CasoReal {
@@ -185,6 +185,47 @@ export default function BibliotecaCasos() {
                       ))}
                     </ul>
                   </div>
+                  {/* Podcast de orientación */}
+                    <div className="mt-5 md:col-span-2 rounded-xl border-indigo-100">
+
+                      <h4 className="font-bold text-indigo-800 mb-3 flex items-center gap-2">
+                        <Headphones className="w-5 h-5" />
+                        Podcast de orientación psicológica
+                      </h4>
+
+                      <p className="text-sm text-indigo-900/80 mb-4">
+                        Un profesional en psicología explica cómo afrontar este tipo de situación
+                        y qué pasos tomar si estás pasando por algo similar.
+                      </p>
+
+                      <div className="flex items-center gap-4 bg-white p-4 rounded-lg border border-indigo-100">
+
+                        {/* Botón play */}
+                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white">
+                          <Play className="w-5 h-5 ml-0.5" />
+                        </div>
+
+                        {/* Información del podcast */}
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold text-gray-900">
+                            Orientación profesional sobre este caso
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            Psicólogo especialista en violencia digital
+                          </p>
+
+                          {/* Barra de progreso falsa */}
+                          <div className="w-full h-1.5 bg-gray-200 rounded-full mt-2 overflow-hidden">
+                            <div className="w-1/3 h-full bg-indigo-500"></div>
+                          </div>
+                        </div>
+
+                        {/* Duración */}
+                        <span className="text-xs text-gray-500">08:24</span>
+
+                      </div>
+
+                    </div>
                 </div>
                 
               </div>

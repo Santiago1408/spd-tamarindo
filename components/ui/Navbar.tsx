@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Shield, BookOpen, ScanEye } from "lucide-react";
+import { Shield, BookOpen, ScanEye, Newspaper } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -51,6 +51,18 @@ export default function Navbar() {
           >
             Huella digital
             <ScanEye className="w-4 h-4" />
+          </Link>
+
+          <Link
+            href="/noticiasBolivia"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+                  isActive("/noticias")
+                    ? " text-primary"
+                    : " text-gray-500"
+                }`}
+          >
+            Noticias Bolivia
+            <Newspaper className="w-4 h-4" />
           </Link>
 
         </nav>
